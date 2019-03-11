@@ -1,6 +1,8 @@
 package com.codecool.greencommitment.common;
 
-public class Measurement {
+import java.io.Serializable;
+
+public class Measurement implements Serializable {
 
     private int id;
     private int value;

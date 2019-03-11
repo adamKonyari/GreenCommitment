@@ -12,7 +12,7 @@ import java.util.Random;
 public class Client {
 
     Ui ui = new Ui();
-    private int id = Integer.parseInt(ui.getUserInput());
+    private int id = 1;
 
     public void start(String hostName, int portNumber, int sleepTime) throws UnknownHostException, IOException, InterruptedException {
 
@@ -22,7 +22,7 @@ public class Client {
         while(true) {
             oos.writeObject(generateRandomMeasurement());
             System.out.println("object sent");
-            Thread.sleep(sleepTime);
+            Thread.sleep(sleepTime * 1000);
         }
 
     }
@@ -31,9 +31,7 @@ public class Client {
 
         Random rand = new Random();
         long time = System.currentTimeMillis();
-
         Measurement mm = new Measurement(id, rand.nextInt(15) + 25, "Celsius", time);
-
         return mm;
     }
 
