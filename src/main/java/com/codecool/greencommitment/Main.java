@@ -12,6 +12,5 @@ public class Main {
             System.out.println("Invalid argument!");
             System.out.println("Possible arguments: CLIENT, SERVER");
         }
-
     }
 }
