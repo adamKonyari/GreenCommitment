@@ -12,14 +12,18 @@ import java.util.Random;
 public class Client {
 
     Ui ui = new Ui();
+    private int id = Integer.parseInt(ui.getUserInput());
 
-    public void start(String hostName, int portNumber) throws UnknownHostException, IOException {
+    public void start(String hostName, int portNumber, int sleepTime) throws UnknownHostException, IOException, InterruptedException {
 
         Socket socket = new Socket(hostName, portNumber);
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-        oos.writeObject(generateRandomMeasurement());
-
+        while(true) {
+            oos.writeObject(generateRandomMeasurement());
+            System.out.println("object sent");
+            Thread.sleep(sleepTime);
+        }
 
     }
 
@@ -28,8 +32,11 @@ public class Client {
         Random rand = new Random();
         long time = System.currentTimeMillis();
 
-        Measurement mm = new Measurement(Integer.parseInt(ui.getUserInput()), rand.nextInt(15) + 25, "Celsius", time);
+        Measurement mm = new Measurement(id, rand.nextInt(15) + 25, "Celsius", time);
 
         return mm;
     }
+
+
 }
+

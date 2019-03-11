@@ -29,8 +29,5 @@ public class Measurement {
     public long getTime() {
         return time;
     }
-
-
-
 }
 
