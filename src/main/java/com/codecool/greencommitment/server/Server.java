@@ -11,19 +11,32 @@ import java.util.List;
 
 
 public class Server {
-
+    private ServerSocket ss;
     private List<Measurement> measurements = new ArrayList<>();
 
-    public void start(int portNumber) throws IOException, ClassNotFoundException {
+    public Server(int portNumber) {
+        try {
+            this.ss = new ServerSocket(portNumber);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        try (ServerSocket ss = new ServerSocket(portNumber);
-             Socket socket = ss.accept();
-             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())
-        ) {
-            while (true) {
+    public void start(int portNumber) throws IOException, ClassNotFoundException {
+        while(true){
+            Socket socket = null;
+
+            try {
+                socket = ss.accept();
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 measurements.add((Measurement) ois.readObject());
                 // System.out.println(ois.readObject());
                 System.out.println(measurements.size());
+                Thread thread = new ClientHandler(socket);
+                thread.start();
+            }
+            catch (Exception e){
+                e.getStackTrace();
             }
         }
     }

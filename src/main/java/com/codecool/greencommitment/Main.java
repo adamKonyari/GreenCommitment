@@ -13,7 +13,7 @@ public class Main {
             Client client = new Client();
             client.start(args[1], Integer.parseInt(args[2]), Integer.parseInt(args[3]));
         } else if (args[0].equals("SERVER")) {
-            Server server = new Server();
+            Server server = new Server(Integer.parseInt(args[1]));
             server.start(Integer.parseInt(args[1]));
             // STARTING SERVER CODE
         } else {
