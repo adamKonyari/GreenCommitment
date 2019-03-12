@@ -3,7 +3,9 @@ package com.codecool.greencommitment.client;
 import com.codecool.greencommitment.common.Measurement;
 import com.codecool.greencommitment.common.Ui;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -16,15 +18,15 @@ public class Client {
 
     public void start(String hostName, int portNumber, int sleepTime) throws UnknownHostException, IOException, InterruptedException {
 
-        Socket socket = new Socket(hostName, portNumber);
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-
-        while(true) {
-            oos.writeObject(generateRandomMeasurement());
-            System.out.println("object sent");
-            Thread.sleep(sleepTime * 1000);
+        try (Socket socket = new Socket(hostName, portNumber);
+             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream())
+        ) {
+            while (true) {
+                oos.writeObject(generateRandomMeasurement());
+                System.out.println("object sent");
+                Thread.sleep(sleepTime * 1000);
+            }
         }
-
     }
 
     public Measurement generateRandomMeasurement() {

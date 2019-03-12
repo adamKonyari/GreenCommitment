@@ -16,15 +16,14 @@ public class Server {
 
     public void start(int portNumber) throws IOException, ClassNotFoundException {
 
-        ServerSocket ss = new ServerSocket(portNumber);
-        Socket socket = null;
-
-        while (true) {
-            socket =  ss.accept();
-            System.out.println("Object received");
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-            measurements.add((Measurement) ois.readObject());
+        try (ServerSocket ss = new ServerSocket(portNumber)
+        ) {
+            while (true) {
+                Socket socket = ss.accept();
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+                measurements.add((Measurement) ois.readObject());
+                System.out.println("Object received");
+            }
         }
     }
-
 }
