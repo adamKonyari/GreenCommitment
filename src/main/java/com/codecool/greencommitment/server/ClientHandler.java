@@ -16,11 +16,10 @@ public class ClientHandler extends Thread{
         this.ois = new ObjectInputStream(s.getInputStream());
     }
 
-
     public void run(List<Measurement> measurementList) throws IOException, ClassNotFoundException {
-        while (true) {
+        while(true) {
             measurementList.add((Measurement) ois.readObject());
-            System.out.println(measurementList.size());
+            System.out.println(measurementList.size() + ".");
         }
     }
 }

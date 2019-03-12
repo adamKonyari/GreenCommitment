@@ -11,12 +11,12 @@ import java.util.List;
 
 
 public class Server {
-    private ServerSocket ss;
+    private ServerSocket serverSocket;
     private List<Measurement> measurements = new ArrayList<>();
 
     public Server(int portNumber) {
         try {
-            this.ss = new ServerSocket(portNumber);
+            this.serverSocket = new ServerSocket(portNumber);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -25,15 +25,13 @@ public class Server {
     public void start(int portNumber) throws IOException, ClassNotFoundException {
         while(true){
             Socket socket = null;
-
             try {
-                socket = ss.accept();
-                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-                measurements.add((Measurement) ois.readObject());
+                socket = serverSocket.accept();
+                // ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 // System.out.println(ois.readObject());
-                System.out.println(measurements.size());
                 Thread thread = new ClientHandler(socket);
-                thread.start();
+                ((ClientHandler) thread).run(measurements);
+                // System.out.println(measurements.size() + ".");
             }
             catch (Exception e){
                 e.getStackTrace();
