@@ -31,5 +31,15 @@ public class Measurement implements Serializable {
     public long getTime() {
         return time;
     }
+
+    @Override
+    public String toString() {
+        return "Measurement{" +
+                "id=" + id +
+                ", value=" + value +
+                ", type='" + type + '\'' +
+                ", time=" + time +
+                '}';
+    }
 }
 

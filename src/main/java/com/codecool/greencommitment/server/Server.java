@@ -22,6 +22,7 @@ public class Server {
         ) {
             while (true) {
                 measurements.add((Measurement) ois.readObject());
+                // System.out.println(ois.readObject());
                 System.out.println(measurements.size());
             }
         }
