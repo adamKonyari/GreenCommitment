@@ -11,6 +11,7 @@ public class ServerInputThread extends Thread {
     private Scanner scanner = new Scanner(System.in);
     private String userInput;
     private List<Measurement> measurementList = new ArrayList<>();
+    private ChartBuilder chartBuilder = new ChartBuilder();
 
     public ServerInputThread(List<Measurement> measurementList) {
 
@@ -21,8 +22,11 @@ public class ServerInputThread extends Thread {
     public void run() {
         while(true) {
             userInput = scanner.nextLine();
-            if (userInput.equals("a")) {
-                System.out.println(measurementList.size());
+            switch(userInput){
+                case "x":
+                    System.exit(0);
+                case "c":
+                    chartBuilder.createChart(measurementList);
             }
         }
     }

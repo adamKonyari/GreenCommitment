@@ -15,8 +15,14 @@ import java.util.Scanner;
 public class Client {
 
     Ui ui = new Ui();
-    private int id = 1;
+    private static int counter = 0;
+    private int id;
     private Scanner scanner = new Scanner(System.in);
+
+    public Client() {
+        counter++;
+        id = counter;
+    }
 
     public void start(String hostName, int portNumber, int sleepTime) throws UnknownHostException, IOException, InterruptedException {
 
