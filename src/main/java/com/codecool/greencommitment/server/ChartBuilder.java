@@ -25,7 +25,7 @@ public class ChartBuilder {
         }
 
         JFreeChart lineChartObject = ChartFactory.createLineChart(
-                "Celsius Measurements", "Time",
+                "Celsius Measurements", "Measurements",
                 "Celsius",
                 lineChartDataset, PlotOrientation.VERTICAL,
                 true, true, false);

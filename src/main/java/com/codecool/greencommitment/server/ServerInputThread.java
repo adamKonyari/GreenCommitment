@@ -12,6 +12,7 @@ public class ServerInputThread extends Thread {
     private String userInput;
     private List<Measurement> measurementList = new ArrayList<>();
     private ChartBuilder chartBuilder = new ChartBuilder();
+    private XmlHandling xmlHandling = new XmlHandling();
 
     public ServerInputThread(List<Measurement> measurementList) {
 
@@ -27,6 +28,8 @@ public class ServerInputThread extends Thread {
                     System.exit(0);
                 case "c":
                     chartBuilder.createChart(measurementList);
+                case "s":
+                    xmlHandling.writeToXml(measurementList);
             }
         }
     }
