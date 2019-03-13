@@ -23,15 +23,17 @@ public class ClientThread extends Thread{
             ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
             String clientMessage = "";
             while(!clientMessage.equals("x")) {
-              measurementList.add((Measurement) objectInputStream.readObject());
-                System.out.println(clientNo);
+                if(objectInputStream.readObject() instanceof Measurement) {
+                    measurementList.add((Measurement) objectInputStream.readObject());
+                } else if(objectInputStream.readObject() instanceof String) {
+                    clientMessage = (String) objectInputStream.readObject();
+                }
+                System.out.println(measurementList.size());
             }
             objectInputStream.close();
         } catch(Exception e) {
-            e.printStackTrace();
+        } finally {
+            System.out.println("Client #" + clientNo + ". disconnected!");
         }
-        System.out.println("Client - " + clientNo + ". disconnected!");
     }
-
-
 }

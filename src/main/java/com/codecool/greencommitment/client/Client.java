@@ -10,11 +10,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Client {
 
     Ui ui = new Ui();
     private int id = 1;
+    private Scanner scanner = new Scanner(System.in);
 
     public void start(String hostName, int portNumber, int sleepTime) throws UnknownHostException, IOException, InterruptedException {
 
