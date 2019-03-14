@@ -26,10 +26,13 @@ public class ServerInputThread extends Thread {
             switch(userInput){
                 case "x":
                     System.exit(0);
+                    break;
                 case "c":
                     chartBuilder.createChart(measurementList);
+                    break;
                 case "s":
                     xmlHandling.writeToXml(measurementList);
+                    break;
             }
         }
     }

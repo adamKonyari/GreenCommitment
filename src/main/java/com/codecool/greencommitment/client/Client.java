@@ -34,6 +34,8 @@ public class Client {
                 System.out.println("object sent");
                 Thread.sleep(sleepTime * 1000);
             }
+        } catch (Exception e) {
+            System.out.println("Client has disconnected from the server.");
         }
     }
 
@@ -41,7 +43,7 @@ public class Client {
 
         Random rand = new Random();
         long time = System.currentTimeMillis();
-        Measurement mm = new Measurement(id, rand.nextInt(15) + 25, "Celsius", time);
+        Measurement mm = new Measurement(id, rand.nextInt(35) + 5, "Celsius", time);
         return mm;
     }
 

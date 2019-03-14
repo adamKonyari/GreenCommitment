@@ -28,7 +28,7 @@ public class ClientThread extends Thread{
                 } else if(objectInputStream.readObject() instanceof String) {
                     clientMessage = (String) objectInputStream.readObject();
                 }
-                System.out.println("Server has received data from Client #" + clientNo);
+                System.out.println("Client #" + clientNo + " temperature: " + ((Measurement) objectInputStream.readObject()).getValue() + " °C");
             }
             objectInputStream.close();
         } catch(Exception e) {

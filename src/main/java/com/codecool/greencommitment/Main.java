@@ -23,3 +23,7 @@ public class Main {
         }
     }
 }
+
+/*
+java -cp GreenCommitment.jar:/Users/adam/.m2/repository/jfree/jfreechart/1.0.13/jfreechart-1.0.13.jar:/Users/adam/.m2/repository/jfree/jcommon/1.0.16/jcommon-1.0.16.jar com.codecool.greencommitment.Main SERVER 4999
+ */

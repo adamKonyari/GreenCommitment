@@ -45,11 +45,11 @@ public class XmlHandling {
                 tagElement.appendChild(time);
 
                 Element value = document.createElement("value");
-                time.appendChild(document.createTextNode(String.valueOf(measurement.getValue())));
+                value.appendChild(document.createTextNode(String.valueOf(measurement.getValue())));
                 tagElement.appendChild(value);
 
                 Element type = document.createElement("type");
-                time.appendChild(document.createTextNode(String.valueOf(measurement.getType())));
+                type.appendChild(document.createTextNode(String.valueOf(measurement.getType())));
                 tagElement.appendChild(type);
             }
             transformer.transform(source, result);
