@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.List;
 
-public class ClientThread extends Thread{
+public class ClientThread extends Thread {
     private Socket clientSocket;
     private int clientNo;
     private List<Measurement> measurementList;
@@ -19,21 +19,20 @@ public class ClientThread extends Thread{
     }
 
     public void run() {
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
-            String clientMessage = "";
-            while(!clientMessage.equals("x")) {
-                if(objectInputStream.readObject() instanceof Measurement) {
-                    measurementList.add((Measurement) objectInputStream.readObject());
-                } else if(objectInputStream.readObject() instanceof String) {
-                    clientMessage = (String) objectInputStream.readObject();
-                }
-                System.out.println("Client #" + clientNo + " temperature: " + ((Measurement) objectInputStream.readObject()).getValue() + " °C");
+        try (
+                ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream())
+        ) {
+
+            while (true) {
+                Object input = objectInputStream.readObject();
+                measurementList.add((Measurement) input);
+                System.out.println("Sensor #" + clientNo + " temperature: " + ((Measurement) input).getValue() + " °C");
             }
-            objectInputStream.close();
-        } catch(Exception e) {
+
+        } catch (Exception e) {
         } finally {
             System.out.println("Client #" + clientNo + ". disconnected!");
         }
     }
 }
+

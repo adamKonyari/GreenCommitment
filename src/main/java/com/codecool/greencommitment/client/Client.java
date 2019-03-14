@@ -30,8 +30,9 @@ public class Client {
              ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream())
         ) {
             while (true) {
-                oos.writeObject(generateRandomMeasurement());
-                System.out.println("object sent");
+                Measurement randomMeasuremenet = generateRandomMeasurement();
+                oos.writeObject(randomMeasuremenet);
+                System.out.println("Sensor temperature sent: " + randomMeasuremenet.getValue() + " °C");
                 Thread.sleep(sleepTime * 1000);
             }
         } catch (Exception e) {
