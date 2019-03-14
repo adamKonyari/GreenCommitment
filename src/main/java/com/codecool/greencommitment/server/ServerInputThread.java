@@ -25,6 +25,7 @@ public class ServerInputThread extends Thread {
             userInput = scanner.nextLine();
             switch(userInput){
                 case "x":
+                    System.out.println("Server shutting down...");
                     System.exit(0);
                     break;
                 case "c":
